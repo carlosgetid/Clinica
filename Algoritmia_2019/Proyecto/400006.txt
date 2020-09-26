@@ -1,0 +1,17 @@
+Codigo de Consulta:	400006
+Codigo de Paciente:	200001
+Fecha de Atención:	30/06/2019
+Hora de Atención:	10:50
+Total a Pagar:		134.25
+Estado:			Pendiente
+
+
+RECETA
+
+Codigo de la Medicina:	300001
+Nombre de la Medicina:	Paracetamol
+Precio Unitario:	12.5
+Cantidad:		2
+Precio Total:		25.0
+
+

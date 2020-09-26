@@ -1,0 +1,10 @@
+package Clases;
+
+public class Internamiento {
+	
+	private int CodigoInternamiento,codigoPaciente,numeroCama;
+	private String fechaIngreso,horaIngreso,fechaSalida,horaSalida;
+	private double totalPagar;
+	private int estado;
+
+}

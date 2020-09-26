@@ -1,0 +1,89 @@
+package Clases;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+public class Receta {
+	
+	public int codigoConsulta,codigoMedicina,cantidad;
+	public double precioUnitario;
+	
+	public Receta(int codigoConsulta, int codigoMedicina, int cantidad, double precioUnitario) {
+		this.codigoConsulta = codigoConsulta;
+		this.codigoMedicina = codigoMedicina;
+		this.cantidad = cantidad;
+		this.precioUnitario = precioUnitario;
+	}
+	public int getcodigoConsulta(){
+		return codigoConsulta;
+	}
+	public void setcodigoConsulta(int codigoConsulta){
+		this.codigoConsulta = codigoConsulta;
+	}
+	public int getCodigoMedicina() {
+		return codigoMedicina;
+	}
+
+	public void setCodigoMedicina(int codigoMedicina) {
+		this.codigoMedicina = codigoMedicina;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public double getPrecioUnitario() {
+		return precioUnitario;
+	}
+
+	public void setPrecioUnitario(double precioUnitario) {
+		this.precioUnitario = precioUnitario;
+	}
+	public void cargarConsultaCon(){
+		try {
+			BufferedReader bf;
+			int con, can;;
+			double pre;
+			String c[];
+			bf= new BufferedReader(new FileReader("Receta.txt"));
+			while((linea = bf.readLine())!=null){
+				c= linea.split(";");
+				con= Integer.parseInt(c[0]);
+				pac= Integer.parseInt(c[1]);
+				fec= c[2];
+				hora= c[3];
+				pag= Double.parseDouble(c[4]);
+				es= Integer.parseInt(c[5]);
+				adicionarCon(new Consulta(con, pac, fec, hora, pag, es));
+			}
+			bf.close();
+		} 
+		catch (Exception e) {
+		}
+	}
+	public void grabarConsultaCon(){
+		try {
+			PrintWriter pw;
+			String linea;
+			pw= new PrintWriter(new FileWriter("Consulta.txt"));
+			for(Consulta c:ac){
+				linea= c.getCodigoConsulta()+";"+
+						c.getCodigoPaciente()+";"+
+						c.getFechaAtencion()+";"+
+						c.getHoraAtencion()+";"+
+						c.getTotalPagar()+";"+
+						c.getEstado();
+				pw.println(linea);
+			}
+			pw.close();
+		} 
+		catch (Exception e) {
+		}
+	}
+}

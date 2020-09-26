@@ -1,0 +1,19 @@
+package Clases;
+
+public class Consulta {
+	
+	public int codigoPaciente;
+	public String fechaAtencion;
+	public String horaAtencion;
+	public double totalPagar;
+	public int estado;
+	public Consulta(int codigoPaciente, String fechaAtencion, String horaAtencion, double totalPagar, int estado) {
+		Paciente p=new Paciente();
+		this.codigoPaciente = codigoPaciente;
+		this.fechaAtencion = fechaAtencion;
+		this.horaAtencion = horaAtencion;
+		this.totalPagar = totalPagar;
+		this.estado = estado;
+	}
+	
+}

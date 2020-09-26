@@ -1,0 +1,9 @@
+package Arreglos;
+
+import java.util.ArrayList;
+
+import Clases.Consulta;
+
+public class ArregloConsulta {
+	ArrayList<Consulta>
+}

@@ -1,0 +1,49 @@
+package Clases;
+
+public class Paciente {
+	
+	public int codigoPaciente;
+	public String nombre;
+	public String apellidos;
+	public String telefono;
+	public String dni;
+	public Paciente(int codigoPaciente, String nombre, String apellidos, String telefono, String dni) {
+		this.codigoPaciente = codigoPaciente;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.telefono = telefono;
+		this.dni = dni;
+	}
+	public Paciente(){
+	}
+	public int getCodigoPaciente() {
+		return codigoPaciente;
+	}
+	public void setCodigoPaciente(int codigoPaciente) {
+		this.codigoPaciente = codigoPaciente;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellidos() {
+		return apellidos;
+	}
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	public String getDni() {
+		return dni;
+	}
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+}

@@ -1,0 +1,111 @@
+package Gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
+
+public class GuiPGInternamientos extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblCodigoInternamiento;
+	private JComboBox cboInternamiento;
+	private JLabel lblFechaDeSalida;
+	private JLabel lblEstadoDeIternamiento;
+	private JTextField txtTotalaPagar;
+	private JComboBox comboBox;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+	private JButton btnInternar;
+	private JButton btnCerrar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GuiPGInternamientos frame = new GuiPGInternamientos();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GuiPGInternamientos() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblCodigoInternamiento = new JLabel("Codigo Internamiento");
+		lblCodigoInternamiento.setBounds(10, 11, 115, 14);
+		contentPane.add(lblCodigoInternamiento);
+		
+		cboInternamiento = new JComboBox();
+		cboInternamiento.setBounds(135, 8, 120, 20);
+		contentPane.add(cboInternamiento);
+		
+		lblFechaDeSalida = new JLabel("Total a Pagar");
+		lblFechaDeSalida.setBounds(20, 36, 82, 14);
+		contentPane.add(lblFechaDeSalida);
+		
+		lblEstadoDeIternamiento = new JLabel("Estado");
+		lblEstadoDeIternamiento.setBounds(37, 61, 52, 14);
+		contentPane.add(lblEstadoDeIternamiento);
+		
+		txtTotalaPagar = new JTextField();
+		txtTotalaPagar.setBounds(135, 33, 86, 20);
+		contentPane.add(txtTotalaPagar);
+		txtTotalaPagar.setColumns(10);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Alojado", "Pagado"}));
+		comboBox.setBounds(135, 58, 86, 20);
+		contentPane.add(comboBox);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 153, 414, 97);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+		
+		btnInternar = new JButton("Internar");
+		btnInternar.setBounds(335, 7, 89, 23);
+		contentPane.add(btnInternar);
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(335, 32, 89, 23);
+		contentPane.add(btnCerrar);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(e);
+		}
+	}
+	protected void actionPerformedBtnCerrar(ActionEvent e) {
+		dispose();
+	}
+}

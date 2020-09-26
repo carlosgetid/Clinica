@@ -1,0 +1,157 @@
+package Gui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
+
+public class GuiPGInternamientos extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblCodigoInternamiento;
+	private JComboBox cboInternamiento;
+	private JLabel lblFechaDeSalida;
+	private JLabel lblHoraDeSalida;
+	private JLabel lblEstadoDeIternamiento;
+	private JLabel lblEstadoCama;
+	private JComboBox comboBox;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+	private JButton btnConsultar;
+	private JButton btnActualizar;
+	private JTextField txtTotalaPagar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GuiPGInternamientos frame = new GuiPGInternamientos();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GuiPGInternamientos() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 631, 458);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblCodigoInternamiento = new JLabel("Codigo Internamiento");
+		lblCodigoInternamiento.setBounds(10, 11, 115, 14);
+		contentPane.add(lblCodigoInternamiento);
+		
+		cboInternamiento = new JComboBox();
+		cboInternamiento.setBounds(135, 8, 120, 20);
+		contentPane.add(cboInternamiento);
+		
+		lblFechaDeSalida = new JLabel("Fecha de salida");
+		lblFechaDeSalida.setBounds(10, 36, 82, 14);
+		contentPane.add(lblFechaDeSalida);
+		
+		lblHoraDeSalida = new JLabel("Hora de salida");
+		lblHoraDeSalida.setBounds(10, 61, 82, 14);
+		contentPane.add(lblHoraDeSalida);
+		
+		lblEstadoDeIternamiento = new JLabel("estado de iternamiento");
+		lblEstadoDeIternamiento.setBounds(10, 86, 115, 14);
+		contentPane.add(lblEstadoDeIternamiento);
+		
+		lblEstadoCama = new JLabel("Total a pagar");
+		lblEstadoCama.setBounds(10, 111, 82, 14);
+		contentPane.add(lblEstadoCama);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Alojado", "Pagado"}));
+		comboBox.setBounds(135, 83, 86, 20);
+		contentPane.add(comboBox);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 153, 595, 255);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.setBounds(469, 11, 89, 23);
+		contentPane.add(btnConsultar);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(this);
+		btnActualizar.setBounds(469, 45, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		txtTotalaPagar = new JTextField();
+		txtTotalaPagar.setColumns(10);
+		txtTotalaPagar.setBounds(135, 108, 86, 20);
+		contentPane.add(txtTotalaPagar);
+		
+		JComboBox<String> comboBox_1 = new JComboBox<String>();
+		comboBox_1.setEnabled(false);
+		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		comboBox_1.setBounds(135, 33, 52, 20);
+		contentPane.add(comboBox_1);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setEnabled(false);
+		comboBox_2.setMaximumRowCount(6);
+		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		comboBox_2.setBounds(192, 33, 94, 20);
+		contentPane.add(comboBox_2);
+		
+		JComboBox<String> comboBox_3 = new JComboBox<String>();
+		comboBox_3.setEnabled(false);
+		comboBox_3.setMaximumRowCount(6);
+		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		comboBox_3.setBounds(290, 33, 56, 20);
+		contentPane.add(comboBox_3);
+		
+		JComboBox<String> comboBox_4 = new JComboBox<String>();
+		comboBox_4.setEnabled(false);
+		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		comboBox_4.setBounds(135, 58, 46, 20);
+		contentPane.add(comboBox_4);
+		
+		JComboBox<String> comboBox_5 = new JComboBox<String>();
+		comboBox_5.setEnabled(false);
+		comboBox_5.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		comboBox_5.setBounds(186, 58, 46, 20);
+		contentPane.add(comboBox_5);
+		
+		UIManager.put( "ComboBox.disabledForeground", Color.BLACK );
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnActualizar) {
+			actionPerformedBtnCerrar(e);
+		}
+	}
+	protected void actionPerformedBtnCerrar(ActionEvent e) {
+	}
+}

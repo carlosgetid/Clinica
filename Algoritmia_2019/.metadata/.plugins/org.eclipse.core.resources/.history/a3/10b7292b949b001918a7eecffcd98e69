@@ -1,0 +1,68 @@
+package Clases;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+public class Receta {
+	
+	public int codigoConsulta,codigoMedicina,cantidad;
+	public double precioUnitario;
+	
+	public Receta(int codigoConsulta, int codigoMedicina, int cantidad, double precioUnitario) {
+		this.codigoConsulta = codigoConsulta;
+		this.codigoMedicina = codigoMedicina;
+		this.cantidad = cantidad;
+		this.precioUnitario = precioUnitario;
+	}
+	public int getcodigoConsulta(){
+		return codigoConsulta;
+	}
+	public void setcodigoConsulta(int codigoConsulta){
+		this.codigoConsulta = codigoConsulta;
+	}
+	public int getCodigoMedicina() {
+		return codigoMedicina;
+	}
+
+	public void setCodigoMedicina(int codigoMedicina) {
+		this.codigoMedicina = codigoMedicina;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public double getPrecioUnitario() {
+		return precioUnitario;
+	}
+
+	public void setPrecioUnitario(double precioUnitario) {
+		this.precioUnitario = precioUnitario;
+	}
+	public void cargarReceta(){
+		try {
+			BufferedReader bf;
+			String linea;
+			int cc,cm,ca;
+			double pu;
+			String s[];
+			bf= new BufferedReader(new FileReader("Receta.txt"));
+			while((linea=bf.readLine())!=null){
+				s=linea.split(";");
+				cc= Integer.parseInt(s[0]);
+				cm= Integer.parseInt(s[1]);
+				ca= Integer.parseInt(s[2]);
+				pu= Double.parseDouble(s[3]);
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+}

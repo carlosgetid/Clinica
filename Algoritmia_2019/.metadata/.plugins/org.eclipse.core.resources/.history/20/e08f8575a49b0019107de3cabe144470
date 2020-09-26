@@ -1,0 +1,147 @@
+package Gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Clases.Consulta;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+
+public class GuiConsulta extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JButton btnCerrar;
+	private JButton btnListar;
+	private JTable tbtableC;
+	private JButton btnEliminar;
+	private JButton btnAdicionar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GuiConsulta frame = new GuiConsulta();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GuiConsulta() {
+		setTitle("Registro | Consulta");
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent wc){
+					Cerrar();
+				}
+		});
+		setBounds(100, 100, 852, 467);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(604, 11, 104, 36);
+		contentPane.add(btnCerrar);
+		
+		btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.addActionListener(this);
+		btnAdicionar.setBounds(114, 11, 104, 36);
+		contentPane.add(btnAdicionar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(this);
+		btnEliminar.setBounds(275, 11, 104, 36);
+		contentPane.add(btnEliminar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 69, 816, 348);
+		contentPane.add(scrollPane);
+		
+		tbtableC = new JTable();
+		tbtableC.setFillsViewportHeight(true);
+		tbtableC.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tbtableC.setModel(GuiPrincipal.acon);
+		scrollPane.setViewportView(tbtableC);
+		tbtableC.getSelectionModel().setSelectionInterval(0, 0);
+		
+		btnListar = new JButton("Listar");
+		btnListar.addActionListener(this);
+		btnListar.setBounds(438, 11, 104, 36);
+		contentPane.add(btnListar);
+		listar();
+		Repeat();
+	}
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(arg0);
+		}
+		if(arg0.getSource() == btnAdicionar){
+			APbtnAdicionar(arg0);
+		}
+		if(arg0.getSource() == btnEliminar){
+			APbtnEliminar(arg0);
+	
+		}
+		if(arg0.getSource() == btnListar){
+			APbtnListar(arg0);
+		}
+	}
+	GUIConsultaACT act= new GUIConsultaACT();
+	protected void actionPerformedBtnCerrar(ActionEvent arg0) {
+	}
+	protected void APbtnAdicionar(ActionEvent arg0){
+		act.setVisible(true);
+		if(!(act.isActive()))
+			listar();
+	}
+	protected void APbtnEliminar(ActionEvent arg0){	
+		int r= tbtableC.getSelectedRow();
+		Consulta c= GuiPrincipal.acon.obtenerCon(r);
+		GuiPrincipal.acon.eliminarCon(c);
+		listar();
+	}
+	protected void APbtnListar(ActionEvent arg0){
+		listar();
+	}
+	void listar(){
+		tbtableC.repaint();
+	}
+	private void Cerrar(){
+		GuiPrincipal.acon.grabarConsultaCon();
+		GuiPrincipal.ar.grabarReceta();
+		dispose();
+	}
+	private void Repeat(){
+		if(!(act.isActive())){
+			listar();
+		}
+	}
+}

@@ -1,0 +1,29 @@
+package Arreglos;
+
+import java.util.ArrayList;
+
+import Clases.Consulta;
+
+public class ArregloConsulta {
+	private ArrayList<Consulta>ac;
+	public ArregloConsulta() {
+		ac= new ArrayList<Consulta>();
+	}
+	public int tamañoCon(){
+		return ac.size();
+	}
+	public Consulta obtenerCon(int c){
+		return ac.get(c);
+	}
+	public void adicionarCon(Consulta ad){
+		ac.add(ad);
+	}
+	public Consulta buscar(int cod){
+		for(Consulta c:ac){
+			if(c.get)
+		}
+	}
+	public void eliminarCon(Consulta ad){
+		ac.remove(ad);
+	}
+}

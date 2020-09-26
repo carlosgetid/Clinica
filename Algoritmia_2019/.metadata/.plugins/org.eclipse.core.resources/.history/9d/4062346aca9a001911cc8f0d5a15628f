@@ -1,0 +1,184 @@
+package Gui;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Clases.Consulta;
+import Clases.Paciente;
+
+import javax.swing.JTextField;
+import java.awt.Label;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+
+public class GUIConsultaACT extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+	private JTextField txtConsulta;
+	/**
+	 * @wbp.nonvisual location=-38,279
+	 */
+	private final JTextField textField_3 = new JTextField();
+	private JTextField txtTotalPagar;
+	private JTextField cboCantidadMed;
+	private JComboBox <String> cboMedicina;
+	private JComboBox cboEstado;
+	private JComboBox cboHoraAtencion;
+	private JComboBox cboMinAtencionH;
+	private JComboBox cboDiaAtencion;
+	private JComboBox cboMesAtencion;
+	private JComboBox cboAñoAtencion;
+	private JTextArea textArea;
+	private JComboBox <String> cboPaciente;
+	private JButton btnBoton;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			GUIConsultaACT dialog = new GUIConsultaACT();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public GUIConsultaACT() {
+		textField_3.setColumns(10);
+		setBounds(100, 100, 422, 586);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		Label label = new Label("Codigo de Consulta");
+		label.setBounds(23, 26, 119, 22);
+		contentPanel.add(label);
+		
+		Label label_1 = new Label("Codigo de Paciente");
+		label_1.setBounds(23, 60, 119, 22);
+		contentPanel.add(label_1);
+		
+		Label label_2 = new Label("Fecha de Atenci\u00F3n");
+		label_2.setBounds(23, 95, 107, 22);
+		contentPanel.add(label_2);
+		
+		Label label_3 = new Label("Hora de Atenci\u00F3n");
+		label_3.setBounds(23, 128, 98, 22);
+		contentPanel.add(label_3);
+		
+		Label label_4 = new Label("Total a Pagar");
+		label_4.setBounds(34, 162, 79, 22);
+		contentPanel.add(label_4);
+		
+		Label label_5 = new Label("Estado");
+		label_5.setBounds(44, 195, 52, 22);
+		contentPanel.add(label_5);
+		
+		txtConsulta = new JTextField();
+		txtConsulta.setBounds(160, 28, 86, 20);
+		contentPanel.add(txtConsulta);
+		txtConsulta.setColumns(10);
+		
+		cboDiaAtencion = new JComboBox();
+		cboDiaAtencion.setBounds(160, 97, 52, 20);
+		contentPanel.add(cboDiaAtencion);
+		
+		cboMesAtencion = new JComboBox();
+		cboMesAtencion.setBounds(218, 97, 81, 20);
+		contentPanel.add(cboMesAtencion);
+		
+		cboAñoAtencion = new JComboBox();
+		cboAñoAtencion.setBounds(305, 97, 56, 20);
+		contentPanel.add(cboAñoAtencion);
+		
+		cboHoraAtencion = new JComboBox();
+		cboHoraAtencion.setBounds(160, 130, 52, 20);
+		contentPanel.add(cboHoraAtencion);
+		
+		cboMinAtencionH = new JComboBox();
+		cboMinAtencionH.setBounds(218, 130, 54, 20);
+		contentPanel.add(cboMinAtencionH);
+		
+		txtTotalPagar = new JTextField();
+		txtTotalPagar.setBounds(160, 162, 86, 20);
+		contentPanel.add(txtTotalPagar);
+		txtTotalPagar.setColumns(10);
+		
+		cboEstado = new JComboBox();
+		cboEstado.setBounds(160, 196, 86, 20);
+		contentPanel.add(cboEstado);
+		
+		Label label_6 = new Label("Medicinas a Recetar");
+		label_6.setBounds(23, 229, 119, 22);
+		contentPanel.add(label_6);
+		
+		cboMedicina = new JComboBox <String>();
+		cboMedicina.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cboMedicina.setBounds(160, 231, 119, 20);
+		contentPanel.add(cboMedicina);
+		
+		Label label_7 = new Label("Cantidad");
+		label_7.setBounds(160, 255, 56, 22);
+		contentPanel.add(label_7);
+		
+		cboCantidadMed = new JTextField();
+		cboCantidadMed.setBounds(218, 255, 43, 20);
+		contentPanel.add(cboCantidadMed);
+		cboCantidadMed.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 341, 383, 195);
+		contentPanel.add(scrollPane);
+		
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		scrollPane.setViewportView(textArea);
+		
+		btnBoton = new JButton("");
+		btnBoton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnBoton.setBounds(148, 299, 107, 31);
+		contentPanel.add(btnBoton);
+		
+		cboPaciente = new JComboBox <String>();
+		cboPaciente.setBounds(160, 62, 86, 20);
+		contentPanel.add(cboPaciente);
+		
+		cargarPacientes();
+		cargarMedicinas();
+	}
+	public void actionPerformed(ActionEvent arg0) {
+		if(arg0.getSource()==btnBoton){
+			APbtnBoton(arg0);
+		}
+	}
+	protected void APbtnBoton(ActionEvent g0){
+	}
+	private void cargarPacientes(){
+		cboPaciente.removeAllItems();
+		for (int i = 0; i < GuiPrincipal.ap.tamaño(); i++) {
+			Paciente p= GuiPrincipal.ap.obtener(i);
+			cboPaciente.addItem(""+p.getCodigoPaciente());
+		}
+	}
+	private void cargarMedicinas(){
+		cboMedicina.removeAllItems();
+		for (int i = 0; i < GuiPrincipal.am.tamaño() ; i++) {
+			cboMedicina.addItem(""+GuiPrincipal.am.obtener(i).getNombre());
+		}
+	}
+}

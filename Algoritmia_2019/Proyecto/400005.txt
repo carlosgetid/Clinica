@@ -1,0 +1,24 @@
+Codigo de Consulta:	400005
+Codigo de Paciente:	200002
+Fecha de Atención:	30/06/2019
+Hora de Atención:	08:10
+Total a Pagar:		112.4
+Estado:			Pendiente
+
+
+RECETA
+
+Codigo de la Medicina:	300006
+Nombre de la Medicina:	Dolocondralan
+Precio Unitario:	2.2
+Cantidad:		4
+Precio Total:		8.8
+
+
+Codigo de la Medicina:	300005
+Nombre de la Medicina:	Panadol Antigripal
+Precio Unitario:	3.6
+Cantidad:		1
+Precio Total:		3.6
+
+

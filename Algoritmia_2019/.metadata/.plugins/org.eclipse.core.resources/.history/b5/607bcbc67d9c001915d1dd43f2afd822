@@ -1,0 +1,126 @@
+package Gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Clases.Consulta;
+
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
+
+public class GuiPGConsultas extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblConsultas;
+	private JComboBox cboConsulta;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+	private JLabel lblEstado;
+	private JComboBox cboEstado;
+	private JButton btnConsultar;
+	private JButton btnActualizar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GuiPGConsultas frame = new GuiPGConsultas();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GuiPGConsultas() {
+		setTitle("Pago | Consultas");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblConsultas = new JLabel("Cod. Consulta");
+		lblConsultas.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblConsultas.setBounds(22, 11, 83, 14);
+		contentPane.add(lblConsultas);
+		
+		cboConsulta = new JComboBox();
+		cboConsulta.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cboConsulta.setBounds(111, 8, 93, 20);
+		contentPane.add(cboConsulta);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 83, 414, 167);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+		
+		lblEstado = new JLabel("Estado");
+		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblEstado.setBounds(39, 42, 62, 14);
+		contentPane.add(lblEstado);
+		
+		cboEstado = new JComboBox();
+		cboEstado.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cboEstado.setModel(new DefaultComboBoxModel(new String[] {"Atencion", "Pagada"}));
+		cboEstado.setBounds(111, 39, 93, 20);
+		contentPane.add(cboEstado);
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnConsultar.addActionListener(this);
+		btnConsultar.setBounds(335, 7, 89, 23);
+		contentPane.add(btnConsultar);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnActualizar.addActionListener(this);
+		btnActualizar.setBounds(335, 38, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		cargarConsultas();
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnActualizar) {
+			actionPerformedBtnAct(e);
+		}
+		if(e.getSource() ==btnConsultar){
+			APbtnConsultar(e);
+		}
+	}
+	protected void actionPerformedBtnAct(ActionEvent e) {
+	}
+	protected void APbtnConsultar(ActionEvent e){
+	}
+	private void cargarConsultas(){
+		cboConsulta.removeAllItems();
+		for (int i = 0; i < GuiPrincipal.acon.tamañoCon(); i++) {
+			Consulta c= GuiPrincipal.acon.obtenerCon(i);
+			if(c.getEstado()==0){
+				cboConsulta.addItem(""+c.getCodigoConsulta());
+			}
+		}
+	}
+}

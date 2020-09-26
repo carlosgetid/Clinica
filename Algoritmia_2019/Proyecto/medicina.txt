@@ -1,0 +1,7 @@
+300001;Paracetamol;lab1;5;12.5
+300002;Ibuprofeno;CortexLab.inc;11;9.25
+300003;Chiquitolina;Acme;2;245.6
+300004;Amoxicilina;Farma S.A.;31;2.5
+300005;Panadol Antigripal;Panadol;32;3.6
+300006;Dolocondralan;Vademecum;23;2.2
+300007;Risperidona;Arkham;9;8.9

@@ -1,0 +1,99 @@
+package Gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
+
+public class GuiConsultas extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblConsultas;
+	private JComboBox comboBox;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+	private JLabel lblEstado;
+	private JComboBox comboBox_1;
+	private JButton btnConsultar;
+	private JButton btnCerrar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GuiPGConsultas frame = new GuiPGConsultas();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GuiConsultas() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblConsultas = new JLabel("Consultas");
+		lblConsultas.setBounds(10, 11, 74, 14);
+		contentPane.add(lblConsultas);
+		
+		comboBox = new JComboBox();
+		comboBox.setBounds(81, 8, 93, 20);
+		contentPane.add(comboBox);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 83, 414, 167);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+		
+		lblEstado = new JLabel("Estado");
+		lblEstado.setBounds(10, 42, 62, 14);
+		contentPane.add(lblEstado);
+		
+		comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"0", "1"}));
+		comboBox_1.setBounds(81, 39, 93, 20);
+		contentPane.add(comboBox_1);
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.setBounds(335, 7, 89, 23);
+		contentPane.add(btnConsultar);
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(335, 38, 89, 23);
+		contentPane.add(btnCerrar);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(e);
+		}
+	}
+	protected void actionPerformedBtnCerrar(ActionEvent e) {
+		dispose();
+	}
+}

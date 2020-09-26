@@ -1,0 +1,423 @@
+package Gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableColumnModel;
+
+import Arreglos.ArregloMedicina;
+import Clases.Medicina;
+import Clases.Paciente;
+import librerias.Libreria;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import java.awt.Font;
+
+public class GuiMedicina extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblCodigoMedicina;
+	private JTextField txtCodigo;
+	private JLabel lblNombre;
+	private JLabel lblLaboratorio;
+	private JLabel lblStock;
+	private JLabel lblPrecioUnitario;
+	private JTextField txtNombre;
+	private JTextField txtLaboratorio;
+	private JTextField txtStock;
+	private JTextField txtPrecioUnitario;
+	private JButton btnAdicionar;
+	private JButton btnConsultar;
+	private JButton btnModificar;
+	private JButton btnEliminar;
+	private JButton btnListar;
+	private JScrollPane scrollPane;
+	private JButton btnCerrar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GuiMedicina frame = new GuiMedicina();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GuiMedicina() {
+		setTitle("Mantenimiento | Medicina");
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent we){
+				cerrarM();
+			}
+		});
+		setBounds(100, 100, 478, 507);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblCodigoMedicina = new JLabel("Codigo Medicina");
+		lblCodigoMedicina.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblCodigoMedicina.setBounds(64, 24, 86, 14);
+		contentPane.add(lblCodigoMedicina);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setBounds(156, 21, 86, 20);
+		contentPane.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
+		lblNombre = new JLabel("Nombre");
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNombre.setBounds(80, 56, 46, 14);
+		contentPane.add(lblNombre);
+		
+		lblLaboratorio = new JLabel("Laboratorio");
+		lblLaboratorio.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblLaboratorio.setBounds(69, 88, 77, 14);
+		contentPane.add(lblLaboratorio);
+		
+		lblStock = new JLabel("Stock");
+		lblStock.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblStock.setBounds(86, 120, 46, 14);
+		contentPane.add(lblStock);
+		
+		lblPrecioUnitario = new JLabel("Precio Unitario");
+		lblPrecioUnitario.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblPrecioUnitario.setBounds(65, 150, 86, 14);
+		contentPane.add(lblPrecioUnitario);
+		
+		txtNombre = new JTextField();
+		txtNombre.setBounds(156, 52, 86, 20);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
+		
+		txtLaboratorio = new JTextField();
+		txtLaboratorio.setBounds(156, 85, 86, 20);
+		contentPane.add(txtLaboratorio);
+		txtLaboratorio.setColumns(10);
+		
+		txtStock = new JTextField();
+		txtStock.setBounds(156, 116, 86, 20);
+		contentPane.add(txtStock);
+		txtStock.setColumns(10);
+		
+		txtPrecioUnitario = new JTextField();
+		txtPrecioUnitario.setBounds(156, 147, 86, 20);
+		contentPane.add(txtPrecioUnitario);
+		txtPrecioUnitario.setColumns(10);
+		
+		btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.addActionListener(this);
+		btnAdicionar.setBounds(297, 20, 89, 23);
+		contentPane.add(btnAdicionar);
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(this);
+		btnConsultar.setBounds(297, 114, 89, 23);
+		contentPane.add(btnConsultar);
+		
+		btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(this);
+		btnModificar.setBounds(297, 50, 89, 23);
+		contentPane.add(btnModificar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(this);
+		btnEliminar.setBounds(297, 82, 89, 23);
+		contentPane.add(btnEliminar);
+		
+		btnListar = new JButton("Listar");
+		btnListar.addActionListener(this);
+		btnListar.setBounds(133, 193, 89, 23);
+		contentPane.add(btnListar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 250, 441, 207);
+		contentPane.add(scrollPane);
+		
+		tableM = new JTable();
+		tableM.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableM.setFillsViewportHeight(true);
+		scrollPane.setViewportView(tableM);
+		tableM.setModel(GuiPrincipal.am);
+		tableM.getSelectionModel().setSelectionInterval(0, 0);
+		
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(242, 193, 89, 23);
+		contentPane.add(btnCerrar);
+		AjustarAnchoCol();
+		MedicinaKeyLimit();
+		MCodigoCorrelativo();
+		tableMClicked();
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnListar) {
+			actionPerformedBtnListar(e);
+		}
+		if (e.getSource() == btnEliminar) {
+			actionPerformedBtnEliminar(e);
+		}
+		if (e.getSource() == btnModificar) {
+			actionPerformedBtnModificar(e);
+		}
+		if (e.getSource() == btnConsultar) {
+			actionPerformedBtnConsultar(e);
+		}
+		if (e.getSource() == btnAdicionar) {
+			actionPerformedBtnAdicionar(e);
+		}
+		if (e.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(e);
+		}
+	}
+	ArregloMedicina am=new ArregloMedicina();
+	private JTable tableM;
+	
+	int leerCodigo(){
+		return Integer.parseInt(txtCodigo.getText());
+	}
+	String leerNombre(){
+		return txtNombre.getText();
+	}
+	String leerLaboratorio(){
+		return txtLaboratorio.getText();
+	}
+	int leerStock(){
+		return Integer.parseInt(txtStock.getText());
+	}
+	double leerPrecioUnitario(){
+		return Double.parseDouble(txtPrecioUnitario.getText());
+	}
+	
+	void listar(){
+		tableM.repaint();
+		limpiarM();
+		MCodigoCorrelativo();
+	}
+	void imprimir(String x){
+	}
+	
+	protected void actionPerformedBtnCerrar(ActionEvent e) {
+		cerrarM();
+	}
+	private void cerrarM(){
+		GuiPrincipal.am.grabarMedicinas();
+		dispose();
+	}
+	protected void actionPerformedBtnAdicionar(ActionEvent e) {
+		int tc= txtCodigo.getText().length();
+		int tn= txtNombre.getText().length();
+		int tl= txtLaboratorio.getText().length();
+		int ts= txtStock.getText().length();
+		int tpu= txtPrecioUnitario.getText().length();
+		if(tc==6 && tn!=0 && tl!=0 && ts!=0 && tpu!=0){
+			if(GuiPrincipal.am.buscar(leerCodigo())==null){
+				Medicina m = new Medicina(leerCodigo(), leerNombre(), leerLaboratorio(), leerStock(), leerPrecioUnitario());
+				GuiPrincipal.am.adicionar(m);
+				Libreria.Mensaje(this,null, "Datos Ingresados Correctamente", "Adicionar", -1, "images/ok t.png");
+				listar();
+				GuiPrincipal.am.grabarMedicinas();
+				limpiarM();
+				MCodigoCorrelativo();
+			}
+			else 
+				Libreria.Mensaje(this,null, "el Codigo ya existe", "Error", -1, "images/no ts.png");
+		}
+		else
+			Libreria.Mensaje(this,null, "Ingrese Datos Validos", "Error", -1, "images/no ts.png");
+	}
+	protected void actionPerformedBtnConsultar(ActionEvent e) {
+		if(txtCodigo.getText().length()==6){
+			int cod=leerCodigo();
+			Medicina m = GuiPrincipal.am.buscar(cod);
+			if(m !=null){
+				txtCodigo.setText(""+m.getCodigoMedicina());
+				txtNombre.setText(""+m.getNombre());
+				txtLaboratorio.setText(""+m.getLaboratorio());
+				txtStock.setText(""+m.getStock());
+				txtPrecioUnitario.setText(""+m.getPrecioUnitario());
+			}
+			else
+				Libreria.Mensaje(this,null, "el Codigo no existe", "Error", -1, "images/no ts.png");
+		}
+		else
+			Libreria.Mensaje(this,null, "Ingrese un Codigo Valido", "Error", -1, "images/no ts.png");
+	}
+	protected void actionPerformedBtnModificar(ActionEvent e) {
+		if(txtCodigo.getText().length()==6){
+			int num=leerCodigo();
+			Medicina m = GuiPrincipal.am.buscar(num);
+			if(m !=null){
+				String nombre=leerNombre();
+				String laboratorio=leerLaboratorio();
+				int Stock=leerStock();
+				double Precio=leerPrecioUnitario();
+				m.setNombre(nombre);
+				m.setLaboratorio(laboratorio);
+				m.setStock(Stock);
+				m.setPrecioUnitario(Precio);	
+				GuiPrincipal.am.grabarMedicinas();
+				Libreria.Mensaje(this,null, "Datos Eliminados Correctamente", "Modificar", -1, "images/ok t.png");
+				listar();
+				limpiarM();
+				MCodigoCorrelativo();
+			}
+			else
+				Libreria.Mensaje(this,null, "el Codigo no existe", "Error", -1, "images/no ts.png");
+		}
+		else
+			Libreria.Mensaje(this,null, "Ingrese un Codigo Valido", "Error", -1, "images/no ts.png");
+	}
+	protected void actionPerformedBtnEliminar(ActionEvent e) {
+		if(txtCodigo.getText().length()==6){
+			if(GuiPrincipal.am.buscar(leerCodigo())!=null){
+				int ok= Libreria.confirmacion(this,null, "¿Realemte desea Eliminar este elemento?", "Eliminar", "images/erase t.png");
+				if(ok == 0){
+					Medicina m=GuiPrincipal.am.buscar(leerCodigo());
+					GuiPrincipal.am.eliminar(m);
+					listar();
+					GuiPrincipal.am.grabarMedicinas();
+					Libreria.Mensaje(this,null, "Datos Eliminados Correctamente", "Modificar", -1, "images/ok t.png");
+					limpiarM();
+					MCodigoCorrelativo();
+				}
+			}
+			else
+				Libreria.Mensaje(this,null, "el Codigo no existe", "Error", -1, "images/no ts.png");
+		}
+		else
+			Libreria.Mensaje(this,null, "Ingrese un Codigo Valido", "Error", -1, "images/no ts.png");
+	}
+	protected void actionPerformedBtnListar(ActionEvent e) {
+		listar();
+	}
+	private void AjustarAnchoCol(){
+		TableColumnModel tm= tableM.getColumnModel();
+		tm.getColumn(0).setPreferredWidth(anchoColumna(18));
+		tm.getColumn(1).setPreferredWidth(anchoColumna(24));
+		tm.getColumn(2).setPreferredWidth(anchoColumna(24));
+		tm.getColumn(3).setPreferredWidth(anchoColumna(10));
+		tm.getColumn(4).setPreferredWidth(anchoColumna(23));
+	}
+	private int anchoColumna(int p){
+		return p*scrollPane.getWidth()/100;
+	}
+	private void MCodigoCorrelativo(){
+		txtCodigo.setText(""+GuiPrincipal.am.CodigoCorrelativoM());
+	}
+	private void MedicinaKeyLimit(){
+		txtCodigo.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent c) {
+				Libreria.SoloNumeros(c, txtCodigo, 6);
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+		txtNombre.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent n) {
+				Libreria.SoloLetras(n, txtNombre, 20);
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+		txtLaboratorio.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent l) {
+				Libreria.SoloLetras(l, txtLaboratorio, 20);
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+		txtStock.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent s) {
+				Libreria.SoloNumeros(s, txtStock, 4);
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+		txtPrecioUnitario.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent pu) {
+				Libreria.SoloNumerosYDeciMales(pu, txtPrecioUnitario, 8);
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+	}
+	private void tableMClicked(){
+		tableM.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent c){
+				limpiarM();
+				int rw= tableM.getSelectedRow();
+				txtCodigo.setText(""+GuiPrincipal.am.obtener(rw).getCodigoMedicina());
+			}
+		});
+	}
+	private void limpiarM(){
+		txtCodigo.setText("");
+		txtNombre.setText("");
+		txtLaboratorio.setText("");
+		txtStock.setText("");
+		txtPrecioUnitario.setText("");
+	}
+}

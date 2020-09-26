@@ -1,0 +1,13 @@
+package Arreglos;
+
+import java.util.ArrayList;
+
+import Clases.Internamiento;
+
+public class ArregloInternamiento {
+	private ArrayList<Internamiento>ai;
+	public ArregloInternamiento(){
+		ai= new ArrayList<Internamiento>();
+	}
+	
+}
